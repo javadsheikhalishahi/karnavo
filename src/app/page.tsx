@@ -1,7 +1,8 @@
-import { TestComponent } from "@/features/test";
 
 export default function Home() {
   return (
-    <TestComponent></TestComponent>
+    <div>
+      Hi
+    </div>
   )
 }
