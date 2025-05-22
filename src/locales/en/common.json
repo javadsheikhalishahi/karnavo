@@ -1,9 +1,13 @@
 {
-    "welcome": "Welcome back!",
-    "email": "Email address",
-    "password": "Password",
-    "login": "Log In",
-    "login_google": "Log in with Google",
-    "login_github": "Log in with GitHub"
-  }
-  
+  "welcome_to_karnavo": "Karnavo!",
+  "description_login_signup": "Log in to access your dashboard, or sign up to get started.",
+  "email": "Email address",
+  "password": "Password",
+  "login": "Log In",
+  "signUp": "Sign Up",
+  "login_google": "Continue with Google",
+  "login_github": "Continue with GitHub",
+  "To" : "To",
+  "dont_have_account": "Don't have an account?",
+  "register": "Register"
+}

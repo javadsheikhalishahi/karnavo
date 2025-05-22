@@ -26,7 +26,7 @@ export const LanguageSwitcher = () => {
         aria-haspopup="true"
         aria-expanded={open}
         onClick={toggleDropdown}
-        className="inline-flex items-center justify-center w-full rounded-md border border-gray-300 bg-white px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="inline-flex items-center justify-center w-full rounded-md border border-gray-300 glassmorphism px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       >
         🌐 {languages.find((l) => l.code === locale)?.label}
         <svg
