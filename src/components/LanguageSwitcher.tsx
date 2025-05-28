@@ -26,7 +26,7 @@ export const LanguageSwitcher = () => {
         aria-haspopup="true"
         aria-expanded={open}
         onClick={toggleDropdown}
-        className="inline-flex items-center justify-center w-full rounded-md border border-gray-300 glassmorphism px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="inline-flex items-center justify-center w-full rounded-xl border border-gray-300 glassmorphism px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-cyan-500"
       >
         🌐 {languages.find((l) => l.code === locale)?.label}
         <svg
@@ -51,8 +51,8 @@ export const LanguageSwitcher = () => {
             <button
               key={code}
               onClick={() => onSelect(code as "en" | "fa")}
-              className={`block w-full px-4 py-2 text-left text-sm ${
-                locale === code ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100"
+              className={`block w-full px-4 py-1 md:py-2 text-left text-sm rounded-sm ${
+                locale === code ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100 hover:rounded-md"
               }`}
               role="menuitem"
             >

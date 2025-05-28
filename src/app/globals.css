@@ -188,6 +188,7 @@ body {
   animation-delay: 4.5s; /* Starts after the first finishes */
 }
 
+
 @layer base {
   * {
     @apply border-border;

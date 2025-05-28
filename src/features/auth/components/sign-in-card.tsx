@@ -1,103 +1,168 @@
 import { DotSeparator } from "@/components/dot-separator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/lib/i18n";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1, "Required"),
+});
 
 export const SignInCard = () => {
   const { t } = useI18n();
-  
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log({ values });
+  };
+
   return (
     <>
-     <Card className="w-full h-full glassmorphism max-w-md mx-auto border-none shadow-xl pt-4">
-  {/* Header Image */}
-  <CardHeader className="flex flex-col items-center text-center p-1">
-    <Image
-      src="/welcome1.png"
-      width={260}
-      height={50}
-      alt="Sign in illustration"
-      className="mt-1 animate-slideInRight1"
-      priority
-    />
-  </CardHeader>
+      <Card className="w-full h-full glassmorphism max-w-lg mx-auto border-none shadow-xl pt-0">
+        {/* Header Image */}
+        <CardHeader className="flex flex-col items-center text-center p-0 -mb-6">
+          <Image
+            src="/welcome3.png"
+            width={260}
+            height={50}
+            alt="Sign in illustration"
+            className="mt-1 mb-0 animate-slideInRight1"
+            priority
+          />
+        </CardHeader>
 
-  {/* Friendly Description */}
-  <div className="px-6 text-center animate-fadeIn">
-    <h1 className="text-lg font-semibold text-gray-800">{t("To")}</h1>
-    <h2 className="text-xl font-semibold text-gray-800 mb-1">{t("welcome_to_karnavo")}</h2>
-    
-    <p className="text-sm text-muted-foreground mb-4">
-      {t("description_login_signup")}
-    </p>
-  </div>
+        {/* Description */}
+        <div className="px-6 text-center animate-fadeIn mb-4">
+          <p className="text-base text-muted-foreground mb-3 leading-snug">
+            {t("description_login_signup")}
+          </p>
+        </div>
 
-  {/* Divider */}
-  <div className="px-6">
-    <DotSeparator className="animate-slideInRight2" />
-  </div>
+        {/* Divider */}
+        <div className="px-6">
+          <DotSeparator className="animate-slideInRight2" />
+        </div>
 
-  {/* Form */}
-  <CardContent className="p-6 animate-slideInRight2">
-    <form className="space-y-4">
-      <Input
-        required
-        type="email"
-        placeholder={t("email")}
-        onChange={() => {}}
-        value=""
-      />
-      <Input
-        required
-        type="password"
-        placeholder={t("password")}
-        minLength={8}
-        maxLength={50}
-        onChange={() => {}}
-        value=""
-      />
-      <Button className="w-full rounded-lg" size="lg">
-        {t("login")}
-      </Button>
-      <div className="text-center mt-2">
-    <span className="text-sm text-muted-foreground">
-      {t("dont_have_account")}{" "}
-      <Link
-        href="/sign-up"
-        className="font-medium text-blue-600 hover:underline hover:text-blue-800 transition-colors"
-      >
-        {t("register")}
-      </Link>
-    </span>
-  </div>
-    </form>
-  </CardContent>
+        {/* Form */}
+        <CardContent className="p-6 animate-slideInRight2">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                name="email"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input {...field} type="email" placeholder={t("email")} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
- {/* Divider */}
-<div className="flex items-center justify-center my-6 w-full animate-fadeIn">
-  <div className="flex-grow h-px bg-gradient-to-r from-transparent via-muted-foreground/30 to-transparent" />
-  <span className="mx-4 text-sm font-medium text-muted-foreground tracking-wider backdrop-blur-sm px-2 rounded-md">
-    OR
-  </span>
-  <div className="flex-grow h-px bg-gradient-to-r from-transparent via-muted-foreground/30 to-transparent" />
-</div>
+              <FormField
+                name="password"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input {...field} type="password" placeholder={t("password")} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="pt-3">
+                <Button
+                  className="w-full rounded-xl"
+                  size="lg"
+                  disabled={false}
+                >
+                  {t("login")}
+                </Button>
+              </div>
 
-  {/* Social Login */}
-  <CardContent className="flex flex-col gap-4 p-6 animate-slideInRight3">
-    <Button className="w-full gap-2" variant="secondary" size="lg">
-      <Image src="/google.svg" width={20} height={20} alt="Google logo" />
-      {t("login_google")}
-    </Button>
-    <Button className="w-full gap-2" variant="secondary" size="lg">
-      <Image src="/github.svg" width={24} height={24} alt="GitHub logo" />
-      {t("login_github")}
-    </Button>
-  </CardContent>
-</Card>
+              <div className="text-center mt-2">
+                <span className="text-sm text-muted-foreground">
+                  {t("dont_have_account")}{" "}
+                  <Link
+                    href="/sign-up"
+                    className="font-medium text-blue-600 hover:underline hover:text-blue-800 transition-colors"
+                  >
+                    {t("register")}
+                  </Link>
+                </span>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
 
+        {/* Divider */}
+        <div className="flex items-center justify-center my-6 w-full animate-fadeIn">
+          <div className="flex-grow h-px bg-gradient-to-r from-transparent via-muted-foreground/30 to-transparent" />
+          <span className="mx-4 text-sm font-semibold text-muted-foreground tracking-wider backdrop-blur-2xl px-2 rounded-md">
+            {t("OR")}
+          </span>
+          <div className="flex-grow h-px bg-gradient-to-r from-transparent via-muted-foreground/30 to-transparent" />
+        </div>
+
+        {/* Social Login */}
+        <CardContent className="flex flex-col gap-4 p-6 animate-slideInRight3">
+          <Button
+            className="group w-full flex items-center justify-center gap-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/10 px-5 py-3 text-md font-semibold text-white transition-all duration-300 hover:bg-white/20 hover:shadow-xl hover:font-bold hover:scale-[1.015] active:scale-100"
+            size="lg"
+            disabled={false}
+          >
+            <Image
+              src="/google.svg"
+              width={22}
+              height={22}
+              alt="Google"
+              className="transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12"
+            />
+            <span className="text-gray-500 group-hover:text-gray-900 tracking-tight">
+              {t("login_google")}
+            </span>
+          </Button>
+
+          <Button
+            className="group w-full flex items-center justify-center gap-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/10 px-5 py-3 text-base font-semibold text-white transition-all duration-300 hover:bg-white/20 hover:shadow-xl hover:scale-[1.015] hover:font-bold active:scale-100"
+            size="lg"
+            disabled={false}
+          >
+            <Image
+              src="/github.svg"
+              width={24}
+              height={24}
+              alt="GitHub"
+              className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12"
+            />
+            <span className="text-gray-500 group-hover:text-gray-900 tracking-tight">
+              {t("login_github")}
+            </span>
+          </Button>
+        </CardContent>
+      </Card>
 
       <footer className="mt-8 mb-4 text-center text-sm text-muted-foreground flex flex-col items-center gap-2">
         <div>
