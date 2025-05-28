@@ -24,5 +24,7 @@
   "signup_explanation_paragraph3": "Get exclusive tools and content tailored to boost your productivity and help you succeed.",
   "signup_explanation_paragraph4": "Enjoy smooth device integration so your data is always available and secure wherever you are.",
   "Signing_Up": "Sign Up",
-  "OR" : "OR"
+  "OR" : "OR",
+  "login_google1": "Continue with Google",
+  "login_github1": "Continue with GitHub"
 }

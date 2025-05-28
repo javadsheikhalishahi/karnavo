@@ -1,10 +1,11 @@
+import QueryProvider from "@/components/query-provider";
 import { I18nProvider } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"]} );
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Karnavo",
@@ -18,10 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="ltr">
-      <body
-        className={cn(inter.className, "antialiased min-h-screen")}
-      >
-        <I18nProvider>{children}</I18nProvider>
+      <body className={cn(inter.className, "antialiased min-h-screen")}>
+        <QueryProvider>
+          <I18nProvider>{children}</I18nProvider>
+        </QueryProvider>
       </body>
     </html>
   );
