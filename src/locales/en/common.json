@@ -23,8 +23,12 @@
   "signup_explanation_paragraph2": "Customize your workspace, collaborate with your team, and securely access your work anytime, anywhere.",
   "signup_explanation_paragraph3": "Get exclusive tools and content tailored to boost your productivity and help you succeed.",
   "signup_explanation_paragraph4": "Enjoy smooth device integration so your data is always available and secure wherever you are.",
-  "Signing_Up": "Sign Up",
+  "Signing_Up": "Register",
   "OR" : "OR",
   "login_google1": "Continue with Google",
-  "login_github1": "Continue with GitHub"
+  "login_github1": "Continue with GitHub",
+  "Logout": "Log out",
+  "Are you sure you want to log out?": "Are you sure you want to log out?",
+  "You’ll need to sign in again to continue using the app.": "You’ll need to sign in again to continue using the app.",
+  "Cancel": "Cancel"
 }

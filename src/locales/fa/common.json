@@ -25,6 +25,10 @@
     "Signing_Up": "ثبت نام",
     "login_google1": "ثبت نام با گوگل",
     "login_github1": " ثبت نام با گیت هاب",
-    "OR" : "یا"
+    "OR" : "یا",
+    "Logout": "خروج",
+    "Are you sure you want to log out?": "آیا تأیید می‌کنید که می‌خواهید از حساب کاربری خود خارج شوید؟",
+    "You’ll need to sign in again to continue using the app.": ".برای ادامه استفاده از برنامه، باید دوباره وارد حساب خود شوید",
+    "Cancel": "لغو"
   }
   

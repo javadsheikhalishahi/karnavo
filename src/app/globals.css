@@ -188,6 +188,34 @@ body {
   animation-delay: 4.5s; /* Starts after the first finishes */
 }
 
+@keyframes dialogShow {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dialogHide {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.animate-dialogShow {
+  animation: dialogShow 0.5s ease-out forwards;
+}
+.animate-dialogHide {
+  animation: dialogHide 0.3s ease-in forwards;
+}
 
 @layer base {
   * {

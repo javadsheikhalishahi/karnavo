@@ -1,3 +1,5 @@
+"use client";
+
 import { DotSeparator } from "@/components/dot-separator";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,9 +19,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/lib/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle, LinkedinIcon } from "lucide-react";
+import { CheckCircle, Eye, EyeOff, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRegister } from "../api/use-register";
@@ -42,7 +45,9 @@ export const SignUpCard = () => {
   const onSubmit = (values: z.infer<typeof registerSchema>) => {
     mutate({ json: values });
   };
-
+  
+  const [showPassword, setShowPassword] = useState(false);
+  
   return (
     <>
     <div
@@ -162,24 +167,37 @@ export const SignUpCard = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                name="password"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="password"
-                        placeholder={t("password")}
-                        className={isFarsi ? "text-right" : "text-left"}
-                        dir={isFarsi ? "rtl" : "ltr"}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+             <FormField
+  name="password"
+  control={form.control}
+  render={({ field }) => {
+    return (
+      <FormItem>
+        <FormControl>
+          <div className="relative">
+            <Input
+              {...field}
+              type={showPassword ? "text" : "password"}
+              className={`${isFarsi ? "pl-10 pr-2 text-right" : "pr-10 pl-2 text-left"}`}
+              dir={isFarsi ? "rtl" : "ltr"}
+              placeholder={t("password")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className={`absolute inset-y-0 flex items-center text-muted-foreground ${isFarsi ? "left-2" : "right-2"}`}
+              dir={isFarsi ? "rtl" : "ltr"}
+              tabIndex={-1} 
+            >
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </button>
+          </div>
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    );
+  }}
+/>
               <Button className="w-full rounded-lg" size="lg" disabled={false}>
                 {t("Signing_Up")}
               </Button>

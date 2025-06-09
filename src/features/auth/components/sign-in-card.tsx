@@ -1,3 +1,5 @@
+'use client';
+
 import { DotSeparator } from "@/components/dot-separator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -11,18 +13,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/lib/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LinkedinIcon } from "lucide-react";
+import { Eye, EyeOff, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useLogin } from "../api/use-login";
 import { loginSchema } from "../schemas";
 
-
 export const SignInCard = () => {
-  const {mutate} = useLogin();
-  const { t } = useI18n();
+  const { mutate, isPending } = useLogin();
+  const { t, locale } = useI18n();
+  const isFarsi = locale === "fa";
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -34,6 +37,7 @@ export const SignInCard = () => {
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
     mutate({ json: values });
   };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <>
@@ -72,30 +76,50 @@ export const SignInCard = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input {...field} type="email" placeholder={t("email")} />
+                      <Input {...field} type="email" className={isFarsi ? "text-right" : "text-left"}
+                        dir={isFarsi ? "rtl" : "ltr"} placeholder={t("email")} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <FormField
-                name="password"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input {...field} type="password" placeholder={t("password")} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+<FormField
+  name="password"
+  control={form.control}
+  render={({ field }) => {
+    return (
+      <FormItem>
+        <FormControl>
+          <div className="relative">
+            <Input
+              {...field}
+              type={showPassword ? "text" : "password"}
+              className={`${isFarsi ? "pl-10 pr-2 text-right" : "pr-10 pl-2 text-left"}`}
+              dir={isFarsi ? "rtl" : "ltr"}
+              placeholder={t("password")}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className={`absolute inset-y-0 flex items-center text-muted-foreground ${isFarsi ? "left-2" : "right-2"}`}
+              dir={isFarsi ? "rtl" : "ltr"}
+              tabIndex={-1} 
+            >
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </button>
+          </div>
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    );
+  }}
+/>
               <div className="pt-3">
                 <Button
                   className="w-full rounded-xl"
                   size="lg"
-                  disabled={false}
+                  disabled={isPending}
                 >
                   {t("login")}
                 </Button>
@@ -106,7 +130,7 @@ export const SignInCard = () => {
                   {t("dont_have_account")}{" "}
                   <Link
                     href="/sign-up"
-                    className="font-medium text-blue-600 hover:underline hover:text-blue-800 transition-colors"
+                    className="font-semibold text-blue-600 hover:underline hover:text-blue-800 transition-colors"
                   >
                     {t("register")}
                   </Link>
@@ -130,7 +154,7 @@ export const SignInCard = () => {
           <Button
             className="group w-full flex items-center justify-center gap-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/10 px-5 py-3 text-md font-semibold text-white transition-all duration-300 hover:bg-white/20 hover:shadow-xl hover:font-bold hover:scale-[1.015] active:scale-100"
             size="lg"
-            disabled={false}
+            disabled={isPending}
           >
             <Image
               src="/google.svg"
@@ -147,7 +171,7 @@ export const SignInCard = () => {
           <Button
             className="group w-full flex items-center justify-center gap-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/10 px-5 py-3 text-base font-semibold text-white transition-all duration-300 hover:bg-white/20 hover:shadow-xl hover:scale-[1.015] hover:font-bold active:scale-100"
             size="lg"
-            disabled={false}
+            disabled={isPending}
           >
             <Image
               src="/github.svg"
