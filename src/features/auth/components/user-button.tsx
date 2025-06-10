@@ -34,7 +34,7 @@ export const UserButton = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center size-10 rounded-full bg-neutral-200 border-neutral-300">
-        <Loader2 className="size-4 animate-spin text-muted-foreground" />
+        <Loader2 className="size-4 animate-spin text-blue-600 text-muted-foreground" />
       </div>
     );
   }
@@ -43,8 +43,8 @@ export const UserButton = () => {
 
   const { name, email } = user;
   const avatarFallback = name
-  ? name.charAt(0).toUpperCase()
-  : email.charAt(0).toUpperCase() ?? "You";
+    ? name.charAt(0).toUpperCase()
+    : email.charAt(0).toUpperCase() ?? "You";
 
   return (
     <>
@@ -59,7 +59,7 @@ export const UserButton = () => {
         <DropdownMenuContent
           align="end"
           side="bottom"
-          className="w-64 rounded-2xl border bg-white/70 shadow-xl backdrop-blur-md transition-all"
+          className="w-64 rounded-2xl border bg-white/70 shadow-xl backdrop-blur-[2px] transition-all"
           sideOffset={12}
         >
           <div className="flex flex-col items-center gap-3 px-4 py-5">
@@ -72,7 +72,7 @@ export const UserButton = () => {
               <p className="text-base font-semibold text-neutral-800">
                 {name || "User"}
               </p>
-              <p className="text-xs text-neutral-500">{email}</p>
+              <p className="text-xs text-neutral-800 mt-2">{email}</p>
             </div>
           </div>
 
@@ -91,38 +91,42 @@ export const UserButton = () => {
       </DropdownMenu>
 
       <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
-  <AlertDialogContent
-    className={`data-[state=open]:animate-dialogShow data-[state=closed]:animate-dialogHide
+        <AlertDialogContent
+          className={`data-[state=open]:animate-dialogShow data-[state=closed]:animate-dialogHide
       rounded-2xl border border-neutral-200 bg-white/80 
-      backdrop-blur-xl shadow-2xl transition-all duration-300 ease-out 
+      backdrop-blur-sm shadow-2xl transition-all duration-300 ease-out 
       ${isFarsi ? "text-right" : "text-left"}`}
-  >
-    <AlertDialogHeader>
-      <AlertDialogTitle className={`text-xl font-bold text-neutral-900 ${isFarsi ? "text-right" : ""}`}>
-        {t("Are you sure you want to log out?")}
-      </AlertDialogTitle>
-      <AlertDialogDescription className={`text-sm font-semibold text-neutral-600 mt-1 mr-1 ${isFarsi ? "text-right" : ""}`}>
-        {t("You’ll need to sign in again to continue using the app.")}
-      </AlertDialogDescription>
-    </AlertDialogHeader>
+        >
+          <AlertDialogHeader>
+            <AlertDialogTitle
+              className={`text-xl font-bold text-neutral-900 ${
+                isFarsi ? "text-right" : ""
+              }`}
+            >
+              {t("Are you sure you want to log out?")}
+            </AlertDialogTitle>
+            <AlertDialogDescription
+              className={`text-sm font-semibold text-neutral-600 mt-1 mr-1 ${
+                isFarsi ? "text-right" : ""
+              }`}
+            >
+              {t("You’ll need to sign in again to continue using the app.")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
 
-    <AlertDialogFooter className="gap-3">
-      <AlertDialogCancel
-        className="rounded-2xl px-5 py-2 text-sm shadow-lg bg-neutral-100 hover:bg-neutral-200 hover:scale-105 transition"
-      >
-        {t("Cancel")}
-      </AlertDialogCancel>
-      <AlertDialogAction
-        onClick={() => logout()}
-        className="rounded-2xl px-5 py-2 text-sm shadow-lg bg-rose-600 text-white hover:scale-105 transition"
-      >
-        {t("Logout")}
-      </AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-
-
+          <AlertDialogFooter className="gap-3">
+            <AlertDialogCancel className="rounded-2xl px-5 py-2 text-sm shadow-lg bg-neutral-100 hover:bg-neutral-200 hover:scale-105 transition">
+              {t("Cancel")}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => logout()}
+              className="rounded-2xl px-5 py-2 text-sm shadow-lg bg-rose-600 text-white hover:scale-105 transition"
+            >
+              {t("Logout")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { DotSeparator } from "@/components/dot-separator";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/lib/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, LinkedinIcon } from "lucide-react";
+import { Eye, EyeOff, LinkedinIcon, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -76,52 +76,70 @@ export const SignInCard = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input {...field} type="email" className={isFarsi ? "text-right" : "text-left"}
-                        dir={isFarsi ? "rtl" : "ltr"} placeholder={t("email")} />
+                      <Input
+                        {...field}
+                        type="email"
+                        className={isFarsi ? "text-right" : "text-left"}
+                        dir={isFarsi ? "rtl" : "ltr"}
+                        placeholder={t("email")}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-<FormField
-  name="password"
-  control={form.control}
-  render={({ field }) => {
-    return (
-      <FormItem>
-        <FormControl>
-          <div className="relative">
-            <Input
-              {...field}
-              type={showPassword ? "text" : "password"}
-              className={`${isFarsi ? "pl-10 pr-2 text-right" : "pr-10 pl-2 text-left"}`}
-              dir={isFarsi ? "rtl" : "ltr"}
-              placeholder={t("password")}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-              className={`absolute inset-y-0 flex items-center text-muted-foreground ${isFarsi ? "left-2" : "right-2"}`}
-              dir={isFarsi ? "rtl" : "ltr"}
-              tabIndex={-1} 
-            >
-              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-            </button>
-          </div>
-        </FormControl>
-        <FormMessage />
-      </FormItem>
-    );
-  }}
-/>
+              <FormField
+                name="password"
+                control={form.control}
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <FormControl>
+                        <div className="relative">
+                          <Input
+                            {...field}
+                            type={showPassword ? "text" : "password"}
+                            className={`${
+                              isFarsi
+                                ? "pl-10 pr-2 text-right"
+                                : "pr-10 pl-2 text-left"
+                            }`}
+                            dir={isFarsi ? "rtl" : "ltr"}
+                            placeholder={t("password")}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            className={`absolute inset-y-0 flex items-center text-muted-foreground ${
+                              isFarsi ? "left-2" : "right-2"
+                            }`}
+                            dir={isFarsi ? "rtl" : "ltr"}
+                            tabIndex={-1}
+                          >
+                            {showPassword ? (
+                              <EyeOff className="w-5 h-5" />
+                            ) : (
+                              <Eye className="w-5 h-5" />
+                            )}
+                          </button>
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
               <div className="pt-3">
                 <Button
-                  className="w-full rounded-xl"
+                  className="w-full rounded-xl flex items-center justify-center gap-2"
                   size="lg"
                   disabled={isPending}
                 >
-                  {t("login")}
+                  {isPending && (
+                    <Loader2 className="animate-spin text-blue-600 w-7 h-7 duration-500" />
+                  )}
+                  {isPending ? t("loading") : t("login")}
                 </Button>
               </div>
 

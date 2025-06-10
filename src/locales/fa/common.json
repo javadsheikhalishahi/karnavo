@@ -29,6 +29,13 @@
     "Logout": "خروج",
     "Are you sure you want to log out?": "آیا تأیید می‌کنید که می‌خواهید از حساب کاربری خود خارج شوید؟",
     "You’ll need to sign in again to continue using the app.": ".برای ادامه استفاده از برنامه، باید دوباره وارد حساب خود شوید",
-    "Cancel": "لغو"
+    "Cancel": "لغو",
+    "loading": "...در حال ورود",
+    "Home" : "خانه",
+    "My Tasks": "کارهای من",
+    "Members": "اعضای تیم",
+    "Settings": "تنظیمات",
+    "Karnavo": "کارناوو",
+    "Monitor all of your projects and tasks here": "تمام پروژه‌ها و وظایف خود را اینجا نظارت کنید"
   }
   

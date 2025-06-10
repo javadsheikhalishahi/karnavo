@@ -30,5 +30,12 @@
   "Logout": "Log out",
   "Are you sure you want to log out?": "Are you sure you want to log out?",
   "You’ll need to sign in again to continue using the app.": "You’ll need to sign in again to continue using the app.",
-  "Cancel": "Cancel"
+  "Cancel": "Cancel",
+  "loading": "Loading ...",
+  "Home": "Home",
+  "My Tasks" : "My Tasks",
+  "Members": "Members",
+  "Settings": "Settings",
+  "Karnavo": "Karnavo",
+  "Monitor all of your projects and tasks here": "Monitor all of your projects and tasks here"
 }
